@@ -25,8 +25,10 @@ jobs:
           unzip dependency-check.zip
       
       - name: Run Dependency Check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         run: |
-          ./dependency-check/bin/dependency-check.sh --nvdApiKey ${{ secrets.NVD_API_KEY }} --out report.html --scan .
+          ./dependency-check/bin/dependency-check.sh --nvdApiKey $NVD_API_KEY --out report.html --scan .
           rm -rf dependency-check*
 
       - name: Upload Artifacts
